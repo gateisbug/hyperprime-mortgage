@@ -2,10 +2,11 @@ import { useState } from 'react';
 
 const { ipcRenderer } = window;
 
-export default function useSearch(setFunds) {
+export default function useSearch(setFunds, setDone) {
   const [value, setValue] = useState('');
 
   const onClickButton = async () => {
+    setDone(false);
     setFunds([]);
     const values = value.toUpperCase().replace(/,/g, '').split(' ');
 
@@ -43,6 +44,7 @@ export default function useSearch(setFunds) {
       }
 
       await duplex('crawl-close');
+      setDone(true);
     }
   };
 

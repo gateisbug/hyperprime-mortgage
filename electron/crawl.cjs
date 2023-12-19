@@ -29,7 +29,7 @@ async function search(link) {
   try {
     await page.goto(link);
     await page.waitForSelector(TARGET, {
-      timeout: 15000,
+      timeout: 20000,
     });
     return true;
   } catch (e) {
