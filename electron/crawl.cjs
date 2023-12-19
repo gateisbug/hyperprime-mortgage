@@ -6,12 +6,17 @@ puppeteer.use(StealthPlugin());
 let browser = null;
 let page = null;
 
+// const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const EDGE_PATH = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const TARGET =
   'div#block-basic-content div#etf-reports-fund div#tabs div.fund-overview-factset__wrapper';
 
 async function init() {
   // noinspection JSCheckFunctionSignatures
-  browser = await puppeteer.launch({ headless: "new" });
+  browser = await puppeteer.launch({
+    headless: "new",
+    executablePath: EDGE_PATH,
+  });
   page = await browser.newPage();
 }
 

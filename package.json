@@ -19,6 +19,7 @@
     "app:build": "rm -rf ./dist ./dist_electron && yarn build:for:electron && yarn electron:builder"
   },
   "dependencies": {
+    "edge-paths": "^3.0.5",
     "puppeteer": "^21.6.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
