@@ -1,7 +1,9 @@
 const path = require('path');
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
-const isDev = process.env.IS_DEV == 'true' ? true : false;
+const crawl = require('./crawl.cjs');
+
+const isDev = process.env.IS_DEV === 'true';
 
 function createWindow() {
   // Create the browser window.
@@ -9,9 +11,11 @@ function createWindow() {
     width: 1600,
     height: 760,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.cjs'),
+      contextIsolation: false,
       nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.cjs'),
     },
+    icon: path.join(__dirname, 'favicon.png')
   });
 
   // and load the index.html of the app.
@@ -45,8 +49,54 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it`s common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
+app.on('window-all-closed', async () => {
+  try {
+    await crawl.close();
+  } catch (e) {
+    console.error(e);
+  }
+
   if (process.platform !== 'darwin') {
     app.quit();
+  }
+});
+
+ipcMain.on('ping', (event, arg) => {
+  console.log('electron', arg);
+  event.reply('ping', arg);
+})
+
+ipcMain.on('crawl-init', async (event) => {
+  try {
+    await crawl.init();
+    event.reply('crawl-init', 'true');
+  } catch (e) {
+    event.reply('crawl-init', 'false');
+  }
+});
+
+ipcMain.on('crawl-search', async (event, data) => {
+  try {
+    const search = await crawl.search(data);
+    if(!search) {
+      event.reply('crawl-search', 'false');
+      return;
+    }
+    const insight = await crawl.getInsight();
+
+    if(search) {
+      event.reply('crawl-search', insight);
+    }
+  } catch (e) {
+    event.reply('crawl-search', 'false');
+  }
+});
+
+ipcMain.on('crawl-close', async (event) => {
+  try {
+    await crawl.close();
+    event.reply('crawl-close', 'true');
+  } catch (e) {
+    event.reply('crawl-close', 'false');
   }
 });
