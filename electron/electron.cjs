@@ -15,7 +15,8 @@ function createWindow() {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.cjs'),
     },
-    icon: path.join(__dirname, '1024x1024.png')
+    icon: path.join(__dirname, '1024x1024.png'),
+    autoHideMenuBar: true,
   });
 
   // and load the index.html of the app.

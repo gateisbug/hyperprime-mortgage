@@ -16,7 +16,8 @@
     "electron:builder": "electron-builder",
     "electron:builder2": "electron-builder --win portable --x64",
     "build:for:electron": "tsc && cross-env ELECTRON=true vite build",
-    "app:build": "rm -rf ./dist ./dist_electron && yarn build:for:electron && yarn electron:builder"
+    "remove": "rm -rf ./dist ./dist_electron",
+    "app:build": "yarn build:for:electron && yarn electron:builder2"
   },
   "dependencies": {
     "edge-paths": "^3.0.5",
