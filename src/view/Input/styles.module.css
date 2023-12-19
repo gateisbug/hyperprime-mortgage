@@ -1,0 +1,30 @@
+/*noinspection CssUnresolvedCustomProperty,CssInvalidHtmlTagReference*/
+.core {
+  box-sizing: border-box;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+  resize: none;
+  width: 100%;
+}
+
+/*noinspection CssUnresolvedCustomProperty,CssInvalidHtmlTagReference*/
+.core::placeholder {
+  color: #666666;
+}
+
+/*noinspection CssUnresolvedCustomProperty,CssInvalidHtmlTagReference*/
+.core:disabled {
+  color: #8f8f8f;
+}
+
+/*noinspection CssUnresolvedCustomProperty,CssInvalidHtmlTagReference*/
+.core:read-only {
+  color: inherit;
+}
+
+/*noinspection CssInvalidHtmlTagReference*/
+.core:active, .core:focus {
+  outline: none;
+}

@@ -1,0 +1,13 @@
+.search {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 16px;
+  align-items: flex-start;
+
+  & > :first-child {
+    flex-grow: 1;
+  }
+  & > :last-child {
+    width: 120px;
+  }
+}

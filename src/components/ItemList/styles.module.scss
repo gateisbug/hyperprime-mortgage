@@ -1,0 +1,15 @@
+.list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 16px;
+}
+
+.item {
+  & > h2 {
+    color: var(--primary);
+  }
+
+  & > p {
+    color: var(--color200);
+  }
+}
