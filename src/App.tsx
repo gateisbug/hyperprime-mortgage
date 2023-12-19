@@ -12,7 +12,6 @@ function App() {
 
   useEffect(() => {
     if (done && funds.length > 0) {
-      console.log(funds);
       const element = document.createElement('a');
       const string = funds.map((v) => `${v.ticker}\n${v.explains}\n`);
       const file = new Blob([string.join('\n')], {
