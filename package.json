@@ -14,7 +14,7 @@
     "electron:pack": "electron-builder --dir",
     "electron:dev": "concurrently -k \"cross-env BROWSER=none yarn dev\" \"yarn electron\"",
     "electron:builder": "electron-builder",
-    "build:for:electron": "vue-tsc --noEmit && cross-env ELECTRON=true vite build",
+    "build:for:electron": "tsc && cross-env ELECTRON=true vite build",
     "app:build": "yarn build:for:electron && yarn electron:builder"
   },
   "dependencies": {
@@ -48,8 +48,8 @@
     "partially supports css-grid"
   ],
   "build": {
-    "appId": "com.gateisbug.my-app",
-    "productName": "MyApp",
+    "appId": "com.gateisbug.hyperprime-mortgage",
+    "productName": "hyperprime-mortgage",
     "copyright": "Copyright © 2023 ${author}",
     "mac": {
       "category": "public.app-category.utilities"
